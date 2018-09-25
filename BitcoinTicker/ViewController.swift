@@ -17,13 +17,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if currencyArray[row] != "Please Select" {
-        print(currencyArray[row])
-        print(currencySymbol[row])
+            
         currencySelected = currencySymbol[row]
         finalURL = baseURL + currencyArray[row]
         getBitcoinPrice(url: finalURL)
+            
         } else {
+            
             bitcoinPriceLabel.text = "Price"
+            
         }
     }
     
