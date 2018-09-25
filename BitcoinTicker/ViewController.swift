@@ -16,18 +16,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if currencyArray[row] != "Please Select" {
         print(currencyArray[row])
         print(currencySymbol[row])
         currencySelected = currencySymbol[row]
         finalURL = baseURL + currencyArray[row]
         getBitcoinPrice(url: finalURL)
+        } else {
+            bitcoinPriceLabel.text = "Price"
+        }
     }
     
     let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC"
-    let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
-    let currencySymbol = ["$", "R$", "$", "¥", "€", "£", "$", "Rp", "₪", "₹", "¥", "$", "kr", "$", "zł", "lei", "₽", "kr", "$", "$", "R"]
+    let currencyArray = ["Please Select","AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    let currencySymbol = ["", "$", "R$", "$", "¥", "€", "£", "$", "Rp", "₪", "₹", "¥", "$", "kr", "$", "zł", "lei", "₽", "kr", "$", "$", "R"]
     var finalURL = ""
-    
+
     var currencySelected = ""
 
     //Pre-setup IBOutlets
@@ -41,6 +45,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
+        
+//        currencyPicker.selectRow(3, inComponent: 0, animated: true)
         
     }
 
